@@ -1,0 +1,33 @@
+인증
+
+유입되는 요청을 허용/거부하는 것을 결정하는것 아니라 
+단순히 유저정보로 유저를 식별하는 것
+
+Authentication   유저식별
+Permissions      각요청에 대한 허용 거부
+Throttling       일정 기간동안에 허용할 최대 횟수
+
+
+인증처리 순서
+
+1.매 요청 시 APIView의 disapatch(request)호출
+2 APIView의 initial(request)호출
+3 APIView의의 perform_authentication(request)호출
+4 request의 user속성 호출 (rest_framework.reqeust.Request)타입
+5 reequst의 _auahticate()호출
+
+
+지원하는 인증의  종류
+Session     Authentication 한번로그인하면세션에 저장  
+basic       Authentication 매 요청시 인증 헤더에 인증정보 담아 요청
+Token       Authentication
+RemoteUser   Authentication
+
+
+모든 Permissions클래스는 다음 2가지 함수 선택적 구현
+1.has_permissions
+APIView의 접근시 체크 거의 모든 Permissions클래스 에서 구현 
+
+2.has_object_permissions
+APIView의 get_object 함수를 통해 object 획득시 체크
+브라우저를 통한 api 접근에서 create/update form노출시 체크

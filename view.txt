@@ -1,0 +1,58 @@
+# APIView - mixinis -generics - viewset
+# APIView
+# DRF의 2가지 기본뷰
+# APIView :클래스 기반 뷰  (django에서 기본view를 상속받는것과 같은) -> Generic - > viewset
+# 하나의 CBV이므로 하나의 URL처리만 가능    iewset제외(2개의 url처리)
+# 각 method(g,p,p,d)에 맞게 멤버함수를 구현하면 해당 method 요청시 호출
+# 직/비렬화 json등 인증체크,사용자 제한체크,권한클래스 지정,요청된 api 버전 문자열을 탐지하여  request.version에저장
+# inintal에서 다 선언함
+
+# @api_view : 함수 기반 뷰를 위한 장식자
+
+# @csrf_exempt면제되는
+# def post_list(request):
+#     pass
+# post_list = csrf_exempt(post_list)  리액트 = 고차 컴포넌트
+
+# generics.CreateAPIView  + generics.ListAPIView   = generics.ListCreateAPIView
+# generics.DestroyAPIView....  많다 
+
+
+# DRF에서 지원하는 믹스인
+# CRATE,List,Retrieve,Update,Destroy(mode)Mixin
+
+
+# retrieve 되찾아오다[회수하다] (=recover) (정보를) 검색하다 수습[개선]하다, (잃은 것을) 되찾다
+# exempt면제되는
+feature 특별히 포함하다, 특징으로 삼다
+# pyton mro mixin을앞에
+
+
+
+viewset  단일 리소스에서 관련있는 view들을 단일 클래스에서 제공 2개의 url이 필요
+
+viewset
+    def list
+    def retrieve
+
+2가지 modelviewset
+ viewsets.ReadOnlyModeViewset ==get만지원
+    list    지원 = 1개의URL
+    detail  지원 = 1개의URL
+viewsets.modelviewset
+    list/create 지원                    1개의URL
+    detail/update/parital=update/delete 지원 1개의 url
+
+개별 view를 만들수도
+post_list = PostViewSet.as_view(
+    {'get':'list',}
+)
+post_detail = PostViewSet.as_view(
+    {'get','retrieve'}
+)
+
+
+router 통해 일괄적으로 url패턴에 등록할수도
+urlpatterns =[
+    path('',include(router.urls))
+]

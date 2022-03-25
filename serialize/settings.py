@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'instagram',
+    'acoounts',
+    'rest_framework.authtoken',
      #local apps
 ]
 
@@ -125,3 +127,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#디폴트 인증설정?
+REST_FRAMEWORK={
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    ],
+    'PAGE_SIZE':100,
+    'DEFAULT_PAGINATION_CLASS': ['rest_framework.pagination.PageNumberPagination'],
+    'DEFAULT_PERMIISOIN_CLASS':[
+        'rest_framework.permission.Is_Authenticated',
+        'rest_framework.permission.Is_Authenticated',
+    ]
+}
