@@ -134,10 +134,18 @@ REST_FRAMEWORK={
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication'
     ],
-    'PAGE_SIZE':100,
-    'DEFAULT_PAGINATION_CLASS': ['rest_framework.pagination.PageNumberPagination'],
+
+    'PAGE_SIZE':3,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'DEFAULT_PERMIISOIN_CLASS':[
         'rest_framework.permission.Is_Authenticated',
-        'rest_framework.permission.Is_Authenticated',
-    ]
-}
+    ],
+
+
+    'DEFAULT_THROTTLEL_CLASSES':[
+        'rest_framework.throttling.UserRateThrottlie',
+    ],
+    'DEFAULT_THROTTLE_RATES':{
+        #anon:none default
+        'user':'3/day',#하루에 세번 숫자 /간격
+    },}

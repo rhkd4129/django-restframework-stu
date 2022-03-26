@@ -1,3 +1,4 @@
+from re import search
 from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 from .serializers import PostSerializer
@@ -8,6 +9,7 @@ from rest_framework.decorators import api_view,action
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .permissions import IsAuthorOrReadonly
+from rest_framework.filters import SearchFilter,OrderingFilter
 # user. is_activce  is_staff is_superuser
 # IsAuthenticatedOrReadOnly비인증요청에게는 읽기 권한만 허용
 # class PublicPostListAPIView(generics.ListCreateAPIView)
@@ -26,6 +28,12 @@ class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = ([IsAuthenticated,IsAuthorOrReadonly] )#접근을위해서는 로그인이 되어있어야한다
+
+
+    filter_backends = [SearchFilter,OrderingFilter]
+    search_fields =['messages']
+    # search_fields =['^=messages']
+    # ordering=[]
     #커스텀
     @action(detail=False,methods=['GET'])
     def public(self,request):
