@@ -12,7 +12,7 @@ router.register("post", views.PostViewSet) #2개의ㅏ url만들어준다
 
 urlpatterns = [
     # path('public/',views.PublicPostListAPIView.as_view()),
-    path('public/',views.public_post_list),
+    # path('public/',views.public_post_list),
     path('',include(router.urls)),
 ]
 
